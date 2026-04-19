@@ -1,0 +1,38 @@
+{
+  "manifest_version": 3,
+  "name": "@mil000 Chest Shield",
+  "description": "Shields @mil000 tweets with a Fortnite-style chest until clicked.",
+  "version": "1.0.23",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://twitter.com/*",
+        "https://*.twitter.com/*",
+        "https://x.com/*",
+        "https://*.x.com/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "css": [
+        "styles.css"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "assets/fortnite-chest.webp",
+        "assets/fortnite-chest.mp3",
+        "assets/fahhhh.mp3"
+      ],
+      "matches": [
+        "https://twitter.com/*",
+        "https://*.twitter.com/*",
+        "https://x.com/*",
+        "https://*.x.com/*"
+      ]
+    }
+  ]
+}
