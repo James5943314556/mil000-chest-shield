@@ -164,7 +164,7 @@
   }
 
   function revealTweet(article, overlay, chestAudio, tweetId) {
-    pauseAudio(chestAudio);
+    disposeChestAudio(chestAudio);
 
     playFahhhSound();
     overlay.classList.add("milo-tweet-shield--revealing");
@@ -186,10 +186,7 @@
 
     const audio = shieldAudioByOverlay.get(overlay);
     if (audio) {
-      pauseAudio(audio);
-      articleByChestAudio.delete(audio);
-      chestAudios.delete(audio);
-      hoveredChestAudios.delete(audio);
+      disposeChestAudio(audio);
     }
 
     overlay.remove();
@@ -296,18 +293,32 @@
   }
 
   function startChestAudio(audio) {
+    if (!chestAudios.has(audio)) {
+      return;
+    }
+
     stopOtherChestAudio(audio);
     hoveredChestAudios.add(audio);
     if (!audio.paused) {
       return;
     }
 
-    seekAudio(audio, CHEST_START_SECONDS, () => playAudio(audio));
+    seekAudio(audio, CHEST_START_SECONDS, () => {
+      if (chestAudios.has(audio) && hoveredChestAudios.has(audio)) {
+        playAudio(audio);
+      }
+    });
   }
 
   function stopChestAudio(audio) {
     hoveredChestAudios.delete(audio);
     pauseAudio(audio);
+  }
+
+  function disposeChestAudio(audio) {
+    stopChestAudio(audio);
+    articleByChestAudio.delete(audio);
+    chestAudios.delete(audio);
   }
 
   function stopOtherChestAudio(activeAudio) {
@@ -400,6 +411,10 @@
   }
 
   function playAudio(audio) {
+    if (!chestAudios.has(audio) || !hoveredChestAudios.has(audio)) {
+      return;
+    }
+
     prepareBoostedAudio(audio, CHEST_GAIN);
     const result = audio.play();
     if (result && typeof result.catch === "function") {
