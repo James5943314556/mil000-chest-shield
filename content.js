@@ -5,7 +5,7 @@
   const CHEST_AUDIO_URL = chrome.runtime.getURL("assets/fortnite-chest.mp3");
   const FAHHH_AUDIO_URL = chrome.runtime.getURL("assets/fahhhh.mp3");
   const CHEST_HOVER_VOLUME = 1;
-  const CHEST_GAIN = 2;
+  const CHEST_GAIN = 1.4;
   const CHEST_START_SECONDS = 0.3;
   const FAHHH_START_SECONDS = 0.3;
   const FAHHH_GAIN = 8;

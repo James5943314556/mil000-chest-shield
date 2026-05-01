@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "@mil000 Chest Shield",
   "description": "Shields @mil000 tweets with a Fortnite-style chest until clicked.",
-  "version": "1.0.24",
+  "version": "1.0.25",
   "content_scripts": [
     {
       "matches": [
